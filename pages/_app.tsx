@@ -1,22 +1,25 @@
 import React from "react";
-import {AppProps} from "next/app";
-import {ChakraProvider, Stack, Image, Input, IconButton, Box} from "@chakra-ui/react";
+import { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import { ChakraProvider, Stack, Image, Input, IconButton } from "@chakra-ui/react";
 
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  function handleSubmit(event: React.FormEvent<HTMLDivElement>){
+  const router = useRouter();
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault();
 
-    console.log(event.target['query'].value);
-    
+    router.push('/query=${event.target["query"].value}');
+
   }
 
   return( 
   <ChakraProvider>
-    <Stack>
+    <Stack bgColor="gray.50" height="100%" minHeight="100vh">
       <Stack bgColor="yellow.400" direction="row" padding={4} spacing={6}>
         <Image src="/logo.png"/>
-        <Box as="form" width="100%" onSubmit={handleSubmit} >
+        <form  style={{width:"100%"}} onSubmit={handleSubmit} >
           <Stack direction="row" spacing={0} width="100%">
             <Input bgColor="white" roundedRight={0}/>
             <IconButton 
@@ -25,7 +28,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
               roundedLeft={0}
             />
           </Stack>
-        </Box>
+        </form>
       </Stack>
       <Component {...pageProps} />
     </Stack>
