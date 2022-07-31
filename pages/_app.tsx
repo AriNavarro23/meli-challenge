@@ -10,7 +10,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault();
 
-    router.push('/query=${event.target["query"].value}');
+    router.push('/?q=${event.target["query"].value}');
 
   }
 
